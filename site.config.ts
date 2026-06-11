@@ -54,9 +54,11 @@ export const siteConfig = {
 
   social: {},
 
-  // Analytics (self-hosted Umami). Leave blank to disable — nothing loads.
+  // Analytics (self-hosted Umami). Both must be set for the script to load.
+  // umamiWebsiteId: create a website in the Umami dashboard (domain
+  // www.kirkpainting.com), then paste its ID (UUID) here.
   analytics: {
-    umamiSrc: "",
+    umamiSrc: "https://stats.kirkpainting.com/script.js",
     umamiWebsiteId: "",
   },
 
