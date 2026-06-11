@@ -42,9 +42,10 @@ server {
 }
 
 server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    http2 on;
+    # listen-line http2 form for broad nginx compatibility (the standalone
+    # "http2 on;" directive only exists on nginx >= 1.25.1).
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
     server_name ${HOST};
 
     ssl_certificate     ${SSL_DIR}/${HOST}.crt;
