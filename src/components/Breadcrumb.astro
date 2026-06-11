@@ -1,0 +1,75 @@
+---
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  crumbs: Crumb[];
+}
+
+const { crumbs } = Astro.props;
+---
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol role="list">
+    <li><a href="/">Home</a></li>
+    {crumbs.map((crumb, i) => (
+      <li aria-current={i === crumbs.length - 1 ? 'page' : undefined}>
+        {crumb.href && i < crumbs.length - 1
+          ? <a href={crumb.href}>{crumb.label}</a>
+          : <span>{crumb.label}</span>
+        }
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: Astro.site?.toString() },
+    ...crumbs.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 2,
+      name: c.label,
+      ...(c.href ? { item: new URL(c.href, Astro.site).toString() } : {}),
+    })),
+  ],
+})} />
+
+<style>
+  .breadcrumb {
+    padding: 0.75rem 0;
+  }
+
+  .breadcrumb ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+  }
+
+  .breadcrumb li + li::before {
+    content: '/';
+    margin-right: 0.25rem;
+    color: var(--color-border);
+  }
+
+  .breadcrumb a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .breadcrumb [aria-current="page"] span {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+</style>

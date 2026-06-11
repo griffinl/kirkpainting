@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { siteConfig } from '../../site.config';
+
+const { disclaimer } = siteConfig.pages;
+const email = siteConfig.pages.contact.email;
+---
+<BaseLayout title={`Affiliate Disclaimer | ${siteConfig.name}`} description={`Affiliate disclosure for ${siteConfig.name}.`}>
+  <div class="container page-wrap">
+    <Breadcrumb crumbs={[{ label: 'Affiliate Disclaimer' }]} />
+    <article class="static-page">
+      <h1>Affiliate Disclaimer</h1>
+      <p class="updated">Last updated: {disclaimer.lastUpdated}</p>
+
+      <p>
+        {siteConfig.name} participates in the Amazon Services LLC Associates Program,
+        an affiliate advertising program designed to provide a means for website owners
+        to earn advertising fees by advertising and linking to Amazon.com.
+      </p>
+
+      <p>
+        When you click on product links on this site and make a purchase,
+        we may earn a small commission at <strong>no additional cost to you</strong>.
+        This helps us keep the site running and continue producing free, honest content.
+      </p>
+
+      <h2>Our Editorial Independence</h2>
+      <p>
+        All product recommendations and rankings on this site are based on our independent
+        editorial analysis — we analyze product specifications, customer review data, and value
+        for money. Affiliate relationships do not influence which products we recommend,
+        how we rank them, or what we write about them.
+      </p>
+      <p>
+        We only recommend products we believe offer genuine value to our readers.
+      </p>
+
+      <h2>Price Accuracy</h2>
+      <p>
+        Prices shown are accurate at the time of publication but may change.
+        Always verify the current price on Amazon before purchasing.
+      </p>
+
+      <h2>Questions?</h2>
+      <p>
+        Contact us at <a href={`mailto:${email}`}>{email}</a>.
+      </p>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-wrap { padding-top: 1.5rem; padding-bottom: 5rem; }
+  .static-page { max-width: 680px; padding-top: 1.5rem; }
+  .static-page h1 { font-size: clamp(1.6rem, 4vw, 2.25rem); margin-bottom: 0.5rem; }
+  .updated { font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 2rem; }
+  .static-page h2 { font-size: 1.15rem; margin-top: 2rem; margin-bottom: 0.5rem; }
+  .static-page p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 0.9em; color: var(--color-text); }
+  .static-page a { color: var(--color-primary); }
+</style>

@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { siteConfig } from '../../site.config';
+
+const { contact } = siteConfig.pages;
+---
+<BaseLayout title={`Contact | ${siteConfig.name}`} description={`Get in touch with the ${siteConfig.name} team.`} noindex>
+  <div class="container page-wrap">
+    <Breadcrumb crumbs={[{ label: 'Contact' }]} />
+    <article class="static-page">
+      <h1>Contact Us</h1>
+      <p>{contact.body}</p>
+      <p>
+        Email us at:&nbsp;
+        <a href={`mailto:${contact.email}`} class="email-link">{contact.email}</a>
+      </p>
+      <p class="response-note">
+        We typically respond within 2–3 business days.
+      </p>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-wrap { padding-top: 1.5rem; padding-bottom: 5rem; }
+
+  .static-page {
+    max-width: 600px;
+    padding-top: 1.5rem;
+  }
+
+  .static-page h1 {
+    font-size: clamp(1.6rem, 4vw, 2.25rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .static-page > p {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1em;
+    color: var(--color-text);
+  }
+
+  .email-link {
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  .response-note {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+</style>

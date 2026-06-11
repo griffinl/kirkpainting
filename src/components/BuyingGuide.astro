@@ -1,0 +1,56 @@
+---
+import type { BuyingGuideSection } from '../lib/types';
+
+interface Props {
+  sections: BuyingGuideSection[];
+}
+
+const { sections } = Astro.props;
+---
+<section class="buying-guide" aria-labelledby="buying-guide-heading">
+  <h2 id="buying-guide-heading" class="guide-title">How to Choose</h2>
+  <div class="guide-sections">
+    {sections.map((s) => (
+      <div class="guide-section">
+        <h3 class="guide-section-heading">{s.heading}</h3>
+        <div class="guide-section-body rich-text" set:html={s.body} />
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .buying-guide {
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin: 2.5rem 0;
+  }
+
+  .guide-title {
+    font-size: 1.35rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--color-primary);
+    display: inline-block;
+  }
+
+  .guide-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .guide-section-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .guide-section-body {
+    font-size: 0.9rem;
+    color: var(--color-text);
+  }
+</style>

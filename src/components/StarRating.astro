@@ -1,0 +1,71 @@
+---
+interface Props {
+  rating: number;   // 1–5, allows decimals
+  count?: number;
+  size?: 'sm' | 'md';
+}
+
+const { rating, count, size = 'md' } = Astro.props;
+const pct = Math.round((rating / 5) * 100);
+const display = rating.toFixed(1);
+---
+<div class:list={['star-rating', size]} aria-label={`Rated ${display} out of 5`}>
+  <div class="stars-outer" aria-hidden="true">
+    <div class="stars-inner" style={`width: ${pct}%`}></div>
+  </div>
+  <span class="rating-number">{display}</span>
+  {count != null && (
+    <span class="review-count">({count.toLocaleString()})</span>
+  )}
+</div>
+
+<style>
+  .star-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .star-rating.sm {
+    font-size: 0.775rem;
+  }
+
+  .stars-outer {
+    position: relative;
+    display: inline-block;
+    font-size: 1em;
+    color: var(--color-border);
+    letter-spacing: 1px;
+  }
+
+  .stars-outer::before {
+    content: '★★★★★';
+  }
+
+  .stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    color: var(--color-star);
+    white-space: nowrap;
+  }
+
+  .stars-inner::before {
+    content: '★★★★★';
+  }
+
+  .rating-number {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .review-count {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    color: var(--color-text-muted);
+  }
+</style>

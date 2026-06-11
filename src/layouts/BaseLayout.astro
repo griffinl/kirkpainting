@@ -1,0 +1,108 @@
+---
+import { siteConfig } from '../../site.config';
+import SEOHead from '../components/SEOHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+}
+
+const {
+  title, description, ogImage, canonicalUrl, noindex = false,
+  type = 'website', publishedTime, modifiedTime,
+} = Astro.props;
+const { theme } = siteConfig;
+
+const analytics = (siteConfig as { analytics?: { umamiSrc?: string; umamiWebsiteId?: string } }).analytics;
+const analyticsOn = Boolean(analytics?.umamiSrc && analytics?.umamiWebsiteId);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Fonts: preconnect + a single async-ish stylesheet (faster than @import) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    />
+
+    <SEOHead
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      canonicalUrl={canonicalUrl}
+      noindex={noindex}
+      type={type}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+    />
+    <!-- Inject niche theme colors as CSS custom properties -->
+    <style is:inline set:html={`
+      :root {
+        --color-primary:       ${theme.colorPrimary};
+        --color-primary-light: ${theme.colorPrimaryLight};
+        --color-accent:        ${theme.colorAccent};
+        --color-cta:           ${theme.colorCta};
+        --color-bg:            ${theme.colorBg};
+        --color-bg-subtle:     ${theme.colorBgSubtle};
+        --color-bg-dark:       ${theme.colorBgDark};
+        --color-text:          ${theme.colorText};
+        --color-text-muted:    ${theme.colorTextMuted};
+        --color-border:        ${theme.colorBorder};
+        --color-pro:           ${theme.colorPro};
+        --color-con:           ${theme.colorCon};
+        --color-star:          ${theme.colorStar};
+        --font-heading:        ${theme.fontHeading};
+        --font-body:           ${theme.fontBody};
+        --font-mono:           ${theme.fontMono};
+      }
+    `}></style>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+
+    {analyticsOn && (
+      <>
+        <!-- Umami analytics (privacy-friendly, ~2KB, async) -->
+        <script defer src={analytics!.umamiSrc} data-website-id={analytics!.umamiWebsiteId}></script>
+        <!-- Auto-track outbound (affiliate) link clicks, Jetpack-style: one
+             delegated listener catches every click on a link to another host. -->
+        <script is:inline>
+          document.addEventListener('click', function (e) {
+            var el = e.target;
+            if (!el || !el.closest) return;
+            var a = el.closest('a');
+            if (!a || !a.href) return;
+            try {
+              var u = new URL(a.href);
+              if (u.hostname !== location.hostname && window.umami) {
+                window.umami.track('outbound-link', {
+                  url: a.href,
+                  text: (a.textContent || '').trim().slice(0, 80),
+                });
+              }
+            } catch (err) {}
+          }, true);
+        </script>
+      </>
+    )}
+  </body>
+</html>

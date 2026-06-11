@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { siteConfig } from '../../site.config';
+
+const { about } = siteConfig.pages;
+---
+<BaseLayout title={`About Us | ${siteConfig.name}`} description={`Learn about the team behind ${siteConfig.name} and how we review home decor products.`}>
+  <div class="container page-wrap">
+    <Breadcrumb crumbs={[{ label: 'About Us' }]} />
+    <article class="static-page">
+      <h1>{about.headline}</h1>
+      {about.body.split('\n\n').map((para) => (
+        <p set:html={para} />
+      ))}
+
+      <div class="methodology">
+        <h2>Our Review Methodology</h2>
+        <ul>
+          <li><strong>Data-first:</strong> We start by collecting verified buyer ratings, review counts, and price history for every product in a category.</li>
+          <li><strong>Review analysis:</strong> We read and synthesize hundreds of verified customer reviews, identifying patterns in praise and complaints.</li>
+          <li><strong>Editorial judgment:</strong> Our team adds context: which products suit which use cases, and what trade-offs matter most.</li>
+          <li><strong>Regular updates:</strong> We revisit articles as new products launch or older picks drop in quality.</li>
+        </ul>
+      </div>
+
+      <div class="editorial-note">
+        <h2>Editorial Independence</h2>
+        <p>
+          We do earn affiliate commissions when you click links and make purchases,
+          but this never influences which products we recommend or how we rank them.
+          Our goal is to be the most trustworthy home decor resource on the internet —
+          and that only works if our recommendations are genuinely honest.
+        </p>
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-wrap { padding-top: 1.5rem; padding-bottom: 5rem; }
+
+  .static-page {
+    max-width: 680px;
+    padding-top: 1.5rem;
+  }
+
+  .static-page h1 {
+    font-size: clamp(1.6rem, 4vw, 2.25rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .static-page > p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text);
+    margin-bottom: 1.25em;
+  }
+
+  .methodology, .editorial-note {
+    margin-top: 2.5rem;
+    padding: 1.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-subtle);
+  }
+
+  .methodology h2, .editorial-note h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .methodology ul {
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .methodology li {
+    font-size: 0.925rem;
+    line-height: 1.6;
+  }
+
+  .editorial-note p {
+    font-size: 0.925rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+</style>

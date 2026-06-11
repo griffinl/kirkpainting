@@ -1,0 +1,22 @@
+{
+  "name": "blog-template",
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "gen-site": "tsx scripts/gen-site.ts",
+    "gen-og": "tsx scripts/gen-og.ts",
+    "create-site": "tsx scripts/create-site.ts",
+    "finalize-site": "tsx scripts/finalize-site.ts"
+  },
+  "dependencies": {
+    "astro": "^5.8.0",
+    "@astrojs/sitemap": "^3.2.1"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "tsx": "^4.19.0"
+  }
+}

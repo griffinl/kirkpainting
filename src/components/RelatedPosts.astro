@@ -1,0 +1,84 @@
+---
+import { articleHeadline } from '../lib/content';
+import type { Article } from '../lib/types';
+
+interface Props {
+  articles: Article[];
+}
+
+const { articles } = Astro.props;
+---
+{articles.length > 0 && (
+  <section class="related" aria-labelledby="related-heading">
+    <h2 id="related-heading" class="related-heading">You Might Also Like</h2>
+    <ul class="related-list" role="list">
+      {articles.map((a) => (
+        <li class="related-item">
+          <a href={`/${a.category}/${a.slug}/`} class="related-link">
+            <span class="related-category">{a.categoryLabel}</span>
+            <span class="related-title">{articleHeadline(a)}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}
+
+<style>
+  .related {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .related-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+  }
+
+  .related-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .related-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    height: 100%;
+    padding: 1rem 1.1rem;
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    text-decoration: none !important;
+    transition: box-shadow 0.15s, transform 0.15s;
+  }
+
+  .related-link:hover {
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+  }
+
+  .related-category {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-primary);
+  }
+
+  .related-title {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-text);
+  }
+
+  @media (max-width: 640px) {
+    .related-list { grid-template-columns: 1fr; }
+  }
+</style>

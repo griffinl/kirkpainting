@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import { siteConfig } from '../../site.config';
+
+const { privacy } = siteConfig.pages;
+const domain = siteConfig.domain;
+const email  = siteConfig.pages.contact.email;
+---
+<BaseLayout title={`Privacy Policy | ${siteConfig.name}`} description={`Privacy policy for ${siteConfig.name}.`}>
+  <div class="container page-wrap">
+    <Breadcrumb crumbs={[{ label: 'Privacy Policy' }]} />
+    <article class="static-page">
+      <h1>Privacy Policy</h1>
+      <p class="updated">Last updated: {privacy.lastUpdated}</p>
+
+      <h2>Information We Collect</h2>
+      <p>
+        {siteConfig.name} (<strong>{domain}</strong>) is a static informational website.
+        We do not operate user accounts, collect form submissions, or store personal data on our own servers.
+      </p>
+      <p>
+        We use standard web analytics (e.g., Google Analytics or a privacy-friendly alternative)
+        to understand aggregate traffic patterns. This may involve cookies that collect anonymized
+        information such as pages visited, time on page, and browser type.
+      </p>
+
+      <h2>Amazon Associates & Third-Party Links</h2>
+      <p>
+        This site participates in the Amazon Services LLC Associates Program, an affiliate advertising
+        program designed to provide a means for sites to earn fees by linking to Amazon.com.
+        When you click an Amazon link, you are subject to Amazon's privacy policy.
+        We have no access to any data Amazon collects from your visit.
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        We may use cookies for analytics purposes only. You can disable cookies in your browser
+        settings at any time without affecting your ability to use this site.
+      </p>
+
+      <h2>Children's Privacy</h2>
+      <p>
+        This site is not directed at children under 13. We do not knowingly collect personal
+        information from children.
+      </p>
+
+      <h2>Changes to This Policy</h2>
+      <p>
+        We may update this policy from time to time. The "Last updated" date at the top reflects
+        the most recent revision.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions? Email us at <a href={`mailto:${email}`}>{email}</a>.
+      </p>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-wrap { padding-top: 1.5rem; padding-bottom: 5rem; }
+  .static-page { max-width: 680px; padding-top: 1.5rem; }
+  .static-page h1 { font-size: clamp(1.6rem, 4vw, 2.25rem); margin-bottom: 0.5rem; }
+  .updated { font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 2rem; }
+  .static-page h2 { font-size: 1.15rem; margin-top: 2rem; margin-bottom: 0.5rem; }
+  .static-page p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 0.9em; color: var(--color-text); }
+  .static-page a { color: var(--color-primary); }
+</style>

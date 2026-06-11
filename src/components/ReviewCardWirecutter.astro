@@ -1,0 +1,297 @@
+---
+import StarRating from './StarRating.astro';
+import type { Product } from '../lib/types';
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+
+// Condense specs into a single line for the wirecutter style
+const specsLine = product.specs.map((s) => `${s.label}: ${s.value}`).join(' · ');
+---
+<article class="wc-card" id={`product-${product.rank}`}>
+  <div class="wc-label-row">
+    <span class="wc-label">{product.label}</span>
+    <span class="wc-rank">#{product.rank}</span>
+  </div>
+
+  <div class="wc-body">
+    <div class="wc-content">
+      <h3 class="wc-title">{product.title}</h3>
+
+      <div class="wc-meta">
+        <StarRating rating={product.rating} count={product.reviewCount} size="sm" />
+        <span class="wc-price">{product.price}</span>
+        <a
+          href={product.affiliateUrl}
+          target="_blank"
+          rel="sponsored nofollow noopener"
+          class="btn btn-primary wc-buy"
+          aria-label={`Check price for ${product.title}`}
+        >
+          Check Price
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </a>
+      </div>
+
+      {specsLine && <p class="wc-specs">{specsLine}</p>}
+
+      <div class="wc-proscons">
+        {product.pros.length > 0 && (
+          <div class="wc-pros">
+            <span class="wc-pc-label pros">Why we like it</span>
+            <ul role="list">
+              {product.pros.map((p) => <li>{p}</li>)}
+            </ul>
+          </div>
+        )}
+        {product.cons.length > 0 && (
+          <div class="wc-cons">
+            <span class="wc-pc-label cons">Keep in mind</span>
+            <ul role="list">
+              {product.cons.map((c) => <li>{c}</li>)}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      {product.review && (
+        <div class="wc-review rich-text" set:html={product.review} />
+      )}
+    </div>
+
+    <div class="wc-image-col">
+      <a href={product.affiliateUrl} target="_blank" rel="sponsored nofollow noopener" class="wc-img-link">
+        <img
+          src={product.image}
+          alt={product.title}
+          loading="lazy"
+          decoding="async"
+          width="220"
+          height="220"
+        />
+      </a>
+    </div>
+  </div>
+
+  {product.verdict && (
+    <p class="wc-verdict">
+      <strong>Bottom line:</strong> {product.verdict}
+    </p>
+  )}
+</article>
+
+<!-- JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: product.title,
+  image: product.image,
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: product.rating,
+    reviewCount: product.reviewCount,
+    bestRating: 5,
+    worstRating: 1,
+  },
+  offers: {
+    '@type': 'Offer',
+    price: product.price.replace(/[^0-9.]/g, ''),
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+    url: product.affiliateUrl,
+  },
+})} />
+
+<style>
+  .wc-card {
+    padding: 2rem 0;
+    border-top: 2px solid var(--color-border);
+  }
+
+  .wc-card:first-of-type {
+    border-top-color: var(--color-primary);
+  }
+
+  /* ── Label row ── */
+  .wc-label-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .wc-label {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    background: rgba(45,74,62,0.08);
+    padding: 0.3em 0.85em;
+    border-radius: 2em;
+  }
+
+  .wc-rank {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  /* ── Body: content left, image right ── */
+  .wc-body {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .wc-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .wc-image-col {
+    flex-shrink: 0;
+    width: 200px;
+  }
+
+  .wc-img-link {
+    display: block;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-bg-subtle);
+  }
+
+  .wc-img-link img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    padding: 0.5rem;
+    transition: transform 0.25s;
+  }
+
+  .wc-img-link:hover img { transform: scale(1.04); }
+
+  /* ── Title + meta ── */
+  .wc-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.6rem;
+    color: var(--color-text);
+  }
+
+  .wc-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .wc-price {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .wc-buy {
+    font-size: 0.82rem;
+    padding: 0.45em 1em;
+  }
+
+  .wc-specs {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  /* ── Pros / Cons ── */
+  .wc-proscons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.1rem;
+  }
+
+  .wc-pc-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.3rem;
+  }
+
+  .wc-pc-label.pros { color: var(--color-pro); }
+  .wc-pc-label.cons { color: var(--color-text-muted); }
+
+  .wc-pros ul,
+  .wc-cons ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .wc-pros li,
+  .wc-cons li {
+    font-size: 0.875rem;
+    color: var(--color-text);
+    line-height: 1.5;
+    padding-left: 1.1em;
+    position: relative;
+  }
+
+  .wc-pros li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-pro);
+    font-weight: 700;
+  }
+
+  .wc-cons li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-text-muted);
+  }
+
+  /* ── Review text ── */
+  .wc-review {
+    font-size: 0.925rem;
+    line-height: 1.75;
+    color: var(--color-text);
+    border-top: 1px solid var(--color-border);
+    padding-top: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  /* ── Bottom line ── */
+  .wc-verdict {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .wc-verdict strong {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  @media (max-width: 640px) {
+    .wc-body { flex-direction: column-reverse; }
+    .wc-image-col { width: 140px; }
+  }
+</style>

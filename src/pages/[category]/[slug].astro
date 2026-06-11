@@ -1,0 +1,369 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import TopPicks from '../../components/TopPicks.astro';
+import ReviewCardDefault from '../../components/ReviewCard.astro';
+import ReviewCardWirecutter from '../../components/ReviewCardWirecutter.astro';
+import BuyingGuide from '../../components/BuyingGuide.astro';
+import FAQ from '../../components/FAQ.astro';
+import RelatedPosts from '../../components/RelatedPosts.astro';
+import { getAllArticles, getArticle, formatDate, articleHeadline, getRelatedArticles, isGuide, readingTime } from '../../lib/content';
+import { siteConfig } from '../../../site.config';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return getAllArticles().map((article) => ({
+    params: { category: article.category, slug: article.slug },
+    props: { article },
+  }));
+};
+
+const { article } = Astro.props;
+const guide = isGuide(article);
+
+const ReviewCard = siteConfig.layout.article === 'wirecutter'
+  ? ReviewCardWirecutter
+  : ReviewCardDefault;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? `https://${siteConfig.domain}`;
+const articleUrl = `${siteUrl}/${article.category}/${article.slug}/`;
+
+// Display headline with accurate count prefix (e.g. "13 Best Magazine Racks of 2026").
+const headline = articleHeadline(article);
+
+// Internal linking: related articles for the bottom of the page.
+const related = getRelatedArticles(article, 3);
+
+// SEO title: keep the full engaging headline for the H1, but drop the descriptive
+// suffix (after : , – —) for the <title> tag when it + brand would exceed ~60 chars,
+// so it doesn't get truncated in search results.
+const TITLE_BUDGET = 60;
+const brandLen = siteConfig.name.length + 3; // " | Name"
+const baseTitle = headline.split(/\s*[:,–—]\s*/)[0].trim();
+const seoTitle =
+  headline.length + brandLen > TITLE_BUDGET ? baseTitle : headline;
+
+const featuredImageUrl = article.featuredImage
+  ? (article.featuredImage.startsWith('http') ? article.featuredImage : `${siteUrl}${article.featuredImage}`)
+  : undefined;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: headline,
+  description: article.metaDescription ?? article.excerpt,
+  datePublished: article.publishedAt,
+  dateModified: article.updatedAt,
+  author: { '@type': 'Organization', name: siteConfig.name, url: siteUrl },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    url: siteUrl,
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/favicon.svg` },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': articleUrl },
+  ...(featuredImageUrl ? { image: featuredImageUrl } : {}),
+};
+
+// ItemList — marks up the ranked roundup so "best X" listicles can earn
+// list-style rich results. Reviews only; guides have no ranked products.
+const itemListSchema = guide ? null : {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: headline,
+  itemListOrder: 'https://schema.org/ItemListOrderDescending',
+  numberOfItems: article.products.length,
+  itemListElement: article.products.map((p) => ({
+    '@type': 'ListItem',
+    position: p.rank,
+    name: p.label,
+    image: p.image,
+    url: `${articleUrl}#product-${p.rank}`,
+  })),
+};
+---
+<BaseLayout
+  title={seoTitle}
+  description={article.metaDescription ?? article.excerpt}
+  ogImage={article.featuredImage}
+  canonicalUrl={articleUrl}
+  type="article"
+  publishedTime={article.publishedAt}
+  modifiedTime={article.updatedAt}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  {itemListSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  )}
+
+  <div class="container article-container">
+    <Breadcrumb crumbs={[
+      { label: article.categoryLabel, href: `/${article.category}/` },
+    ]} />
+
+    <header class="article-header">
+      {!guide && (
+        <p class="article-eyebrow">
+          <span class="slash">//</span> data-verified
+        </p>
+      )}
+      <h1 class="article-title">{headline}</h1>
+      <div class="article-meta">
+        <span>Updated {formatDate(article.updatedAt)}</span>
+        <span aria-hidden="true">·</span>
+        <span>{guide ? `${readingTime(article)} min read` : `${article.products.length} products scored`}</span>
+      </div>
+      <p class="article-excerpt">{article.excerpt}</p>
+    </header>
+
+    <div class="article-layout">
+      {guide && article.featuredImage && (
+        <figure class="guide-featured-image">
+          <img
+            src={article.featuredImage}
+            alt={headline}
+            width="1200"
+            height="630"
+            loading="eager"
+            decoding="async"
+          />
+        </figure>
+      )}
+
+      <div class="article-main">
+        {guide ? (
+          <>
+            <!-- Key takeaways (TL;DR for skimmers) -->
+            {article.keyTakeaways && article.keyTakeaways.length > 0 && (
+              <aside class="tldr" aria-label="Key takeaways">
+                <p class="tldr-label">// the short version</p>
+                <ul role="list">
+                  {article.keyTakeaways.map((t) => <li set:html={t} />)}
+                </ul>
+              </aside>
+            )}
+
+            <!-- Guide body -->
+            <div class="guide-body rich-text" set:html={article.body} />
+
+            <!-- FAQ -->
+            {article.faq && article.faq.length > 0 && (
+              <FAQ items={article.faq} />
+            )}
+
+            <!-- Related reading (internal linking) -->
+            <RelatedPosts articles={related} />
+          </>
+        ) : (
+          <>
+            <!-- Top Picks box -->
+            <TopPicks products={article.products} />
+
+            <!-- Introduction -->
+            <div class="article-intro rich-text" set:html={article.intro} />
+
+            <!-- Review cards -->
+            <section aria-label="Product reviews">
+              {article.products.map((product) => (
+                <ReviewCard product={product} />
+              ))}
+            </section>
+
+            <!-- Buying guide -->
+            {article.buyingGuide && article.buyingGuide.length > 0 && (
+              <BuyingGuide sections={article.buyingGuide} />
+            )}
+
+            <!-- FAQ -->
+            {article.faq && article.faq.length > 0 && (
+              <FAQ items={article.faq} />
+            )}
+
+            <!-- Affiliate disclosure -->
+            <aside class="affiliate-note" aria-label="Affiliate disclosure">
+              <strong>Disclosure:</strong> This page contains affiliate links. We may earn a commission
+              if you purchase through our links — at no extra cost to you. Our editorial opinions are
+              independent and not influenced by affiliate partnerships.
+              <a href="/disclaimer/">Learn more.</a>
+            </aside>
+
+            <!-- Related posts (internal linking) -->
+            <RelatedPosts articles={related} />
+          </>
+        )}
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .article-hero {
+    width: 100%;
+    max-height: 480px;
+    overflow: hidden;
+    background: var(--color-bg-subtle);
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* ── Layout ── */
+  .article-container {
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+  }
+
+  .article-layout {
+    max-width: 800px;
+  }
+
+  .guide-featured-image {
+    margin: 1.75rem 0 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--color-bg-subtle);
+  }
+
+  .guide-featured-image img {
+    display: block;
+    width: 100%;
+    height: auto;          /* native 1200:630 — always a full landscape banner, never cropped */
+  }
+
+  /* ── Header ── */
+  .article-header {
+    padding: 1.25rem 0 2rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 0;
+  }
+
+  .article-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .article-eyebrow .slash { color: var(--color-accent-ink); }
+  .article-eyebrow a { color: var(--color-accent-ink); text-decoration: none; }
+  .article-eyebrow a:hover { text-decoration: underline; }
+
+  .article-title {
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .article-meta strong {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .article-excerpt {
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    max-width: 680px;
+  }
+
+  /* ── Body ── */
+  .article-intro {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin: 1.75rem 0;
+  }
+
+  /* ── Guide body ── */
+  .guide-body {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-top: 1.75rem;
+  }
+
+  .guide-body :global(h2) { font-size: 1.4rem; }
+  .guide-body :global(h3) { font-size: 1.15rem; }
+
+  /* TL;DR / key-takeaways box */
+  .tldr {
+    margin-top: 1.75rem;
+    padding: 1.1rem 1.4rem;
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+  }
+
+  .tldr-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent-ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .tldr ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    margin: 0;
+  }
+
+  .tldr li {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .tldr li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-cta);
+    font-weight: 700;
+  }
+
+  /* ── Affiliate note ── */
+  .affiliate-note {
+    margin-top: 3rem;
+    padding: 1rem 1.25rem;
+    background: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .affiliate-note strong {
+    color: var(--color-text);
+  }
+
+  .affiliate-note a {
+    color: var(--color-primary);
+  }
+</style>
