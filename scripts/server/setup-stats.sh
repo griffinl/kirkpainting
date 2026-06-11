@@ -51,7 +51,8 @@ server {
     ssl_certificate     ${SSL_DIR}/${HOST}.crt;
     ssl_certificate_key ${SSL_DIR}/${HOST}.key;
     ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_session_cache shared:SSL:10m;
+    # NB: no per-server `ssl_session_cache shared:SSL:..` — multiple niche vhosts
+    # reusing the same shared-zone name with different sizes makes nginx -t fail.
 
     # Umami is lightweight; allow room for the dashboard.
     client_max_body_size 2m;
