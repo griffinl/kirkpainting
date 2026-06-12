@@ -59,7 +59,7 @@ export const siteConfig = {
   // www.kirkpainting.com), then paste its ID (UUID) here.
   analytics: {
     umamiSrc: "https://stats.kirkpainting.com/script.js",
-    umamiWebsiteId: "",
+    umamiWebsiteId: "2029c564-052f-4229-bf70-4623068223ef",
   },
 
   pages: {
