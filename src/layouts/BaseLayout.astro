@@ -23,7 +23,11 @@ const {
 const { theme } = siteConfig;
 
 const analytics = (siteConfig as { analytics?: { umamiSrc?: string; umamiWebsiteId?: string } }).analytics;
-const analyticsOn = Boolean(analytics?.umamiSrc && analytics?.umamiWebsiteId);
+// Production-only: never load the tracker in `astro dev`, so local testing
+// doesn't pollute the stats. import.meta.env.PROD is true for `astro build`.
+const analyticsOn = Boolean(
+  import.meta.env.PROD && analytics?.umamiSrc && analytics?.umamiWebsiteId
+);
 ---
 <!doctype html>
 <html lang="en">
