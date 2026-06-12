@@ -1,5 +1,4 @@
 ---
-import StarRating from './StarRating.astro';
 import { kirkScore } from '../lib/content';
 import type { Product } from '../lib/types';
 
@@ -18,6 +17,11 @@ const rankBadge = (rank: number) => {
 // Badge is the keyword-rich section heading (H2); always present.
 const badgeText = product.badge ?? product.bestFor ?? rankBadge(product.rank);
 const score = kirkScore(product);
+const grade =
+  score >= 90 ? 'Outstanding' :
+  score >= 80 ? 'Excellent' :
+  score >= 70 ? 'Very Good' :
+  score >= 60 ? 'Good' : 'Fair';
 ---
 <article class="review-card" id={`product-${product.rank}`}>
 
@@ -38,14 +42,6 @@ const score = kirkScore(product);
           height="260"
         />
       </a>
-      <!-- Kirk Score panel -->
-      <div class="score-panel" aria-label={`Kirk Score ${score} out of 100`}>
-        <div class="score-top">
-          <span class="score-tag">Kirk Score</span>
-          <span class="kscore"><span class="kscore-num">{score}</span><span class="kscore-max">/100</span></span>
-        </div>
-        <div class="score-bar"><span style={`width:${score}%`}></span></div>
-      </div>
     </div>
 
     <div class="review-content">
@@ -53,8 +49,16 @@ const score = kirkScore(product);
         <a href={product.affiliateUrl} target="_blank" rel="sponsored nofollow noopener">{product.label}</a>
       </h3>
 
-      <div class="review-rating">
-        <StarRating rating={product.rating} />
+      <!-- Kirk Score badge -->
+      <div class="kirk-score" aria-label={`Kirk Score ${score} out of 100 — ${grade}`}>
+        <div class="ks-badge">
+          <span class="ks-num">{score}</span>
+          <span class="ks-max">/100</span>
+        </div>
+        <div class="ks-meta">
+          <span class="ks-label">Kirk Score</span>
+          <span class="ks-grade">{grade}</span>
+        </div>
       </div>
 
       {product.specs.length > 0 && (
@@ -172,7 +176,7 @@ const score = kirkScore(product);
   .review-body {
     display: grid;
     grid-template-columns: 240px 1fr;
-    align-items: start;
+    align-items: center;       /* center the product image beside the content */
     padding: 1.75rem 2rem;
     gap: 2rem;
     border-bottom: 1px solid var(--color-border);
@@ -194,32 +198,61 @@ const score = kirkScore(product);
     object-fit: contain;
   }
 
-  /* Kirk Score panel */
-  .score-panel {
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: 0.7rem 0.85rem;
-    background: var(--color-bg);
+  /* Kirk Score badge — number in a navy block + label/grade beside it */
+  .kirk-score {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .ks-badge {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    min-width: 62px;
+    padding: 0.45rem 0.5rem;
+    border-radius: var(--radius-md);
+    background: linear-gradient(150deg, var(--color-primary-light), var(--color-primary));
+    color: #fff;
+    line-height: 1;
+    box-shadow: inset 0 0 0 1px rgba(30,159,216,0.35);
   }
 
-  .score-top {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-  }
-
-  .score-tag {
+  .ks-num {
     font-family: var(--font-mono);
-    font-size: 0.66rem;
+    font-size: 1.7rem;
+    font-weight: 700;
+  }
+
+  .ks-max {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    color: rgba(255,255,255,0.7);
+    margin-top: 0.2rem;
+  }
+
+  .ks-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .ks-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     color: var(--color-text-muted);
   }
 
-  .kscore .kscore-num { font-size: 1.35rem; }
+  .ks-grade {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--color-accent-ink);
+  }
 
   .review-content {
     display: flex;
@@ -367,14 +400,12 @@ const score = kirkScore(product);
     .review-body {
       grid-template-columns: 1fr;
       padding: 1.25rem;
-      gap: 1.25rem;
+      gap: 1.1rem;
     }
-    .review-media {
-      flex-direction: row;
-      align-items: center;
+    .review-img-link {
+      max-width: 200px;
+      margin-inline: auto;   /* centered image above the content */
     }
-    .review-img-link { max-width: 140px; flex-shrink: 0; }
-    .score-panel { flex: 1; }
     .pros-cons { grid-template-columns: 1fr; }
     .pros { border-right: none; border-bottom: 1px solid var(--color-border); }
     .verdict-cta { width: 100%; min-width: 0; }

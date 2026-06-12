@@ -19,6 +19,11 @@ const topScore = !guide && article.products.length
   : 0;
 ---
 <article class:list={['article-card', { featured, horizontal }]}>
+  {article.featuredImage && (
+    <a href={url} class:list={['card-media', { 'is-review': !guide }]} tabindex="-1" aria-hidden="true">
+      <img src={article.featuredImage} alt="" loading="lazy" decoding="async" width="600" height="338" />
+    </a>
+  )}
   <div class="card-body">
     <div class="card-top">
       <a href={`/${article.category}/`} class="card-category badge">
@@ -63,6 +68,35 @@ const topScore = !guide && article.products.length
     transform: translateY(-2px);
     border-color: var(--color-accent);
   }
+
+  /* Card image — guides show a full-bleed photo (cover), reviews show the
+     product shot cleanly (contain on a light panel). */
+  .card-media {
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--color-bg-subtle);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  /* Amazon product shots are on white — match it so they blend seamlessly. */
+  .card-media.is-review {
+    background: #fff;
+  }
+
+  .card-media.is-review img {
+    object-fit: contain;
+    padding: 0.75rem;
+  }
+
+  .article-card:hover .card-media img { transform: scale(1.03); }
 
   .card-body {
     padding: 1.25rem 1.5rem 1.4rem;
@@ -153,6 +187,26 @@ const topScore = !guide && article.products.length
   .article-card.featured .card-excerpt {
     -webkit-line-clamp: 4;
     font-size: 0.92rem;
+  }
+
+  /* Featured card goes side-by-side on desktop so the image stays compact
+     (full-width it was enormous). Image left, text right. */
+  @media (min-width: 720px) {
+    .article-card.featured {
+      flex-direction: row;
+      align-items: stretch;
+    }
+    .article-card.featured .card-media {
+      width: 38%;
+      flex-shrink: 0;
+      aspect-ratio: auto;
+      border-bottom: none;
+      border-right: 1px solid var(--color-border);
+    }
+    .article-card.featured .card-body {
+      flex: 1;
+      justify-content: center;
+    }
   }
 
   /* Horizontal variant (hero layout) */

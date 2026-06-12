@@ -6,9 +6,53 @@ const articleFiles = import.meta.glob<Article>('../content/articles/*.json', {
 });
 
 export function getAllArticles(): Article[] {
-  return Object.values(articleFiles).sort(
-    (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-  );
+  return Object.values(articleFiles)
+    .map((a) => ({ ...a, title: toTitleCase(a.title) }))
+    .sort(
+      (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+    );
+}
+
+// Minor words kept lowercase in Title Case (unless first word or after a boundary).
+const MINOR_WORDS = new Set([
+  'a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'from', 'in', 'into',
+  'nor', 'of', 'off', 'on', 'onto', 'or', 'over', 'per', 'the', 'to', 'up',
+  'via', 'vs', 'with', 'yet',
+]);
+
+function capToken(tok: string, forceCap: boolean): string {
+  return tok
+    .split('-')
+    .map((part, i) => {
+      if (/[A-Z]/.test(part)) return part; // preserve acronyms/brands/mixed-case
+      if (!/[a-z]/.test(part)) return part; // numbers/punctuation only
+      const bare = part.replace(/[^a-z]/gi, '').toLowerCase();
+      if (i === 0 && !forceCap && MINOR_WORDS.has(bare)) return part; // keep minor word
+      return part.replace(/[a-z]/i, (c) => c.toUpperCase()); // cap first letter
+    })
+    .join('-');
+}
+
+/**
+ * Title-case a display headline regardless of how it arrives from the pipeline.
+ * SAFE by design: any token already containing an uppercase letter (acronyms /
+ * brands like "3M", "VOC", "Zero-VOC", "DIYers", "Multi-Grit") is left untouched,
+ * so correct titles never change — only all-lowercase major words get capitalized.
+ * Minor words (a, of, for, the…) stay lowercase unless they are the first word or
+ * follow boundary punctuation (: ? ! — etc.). The pipeline (AmazonScrapling) may
+ * send any casing; the display is always consistent.
+ */
+export function toTitleCase(input: string): string {
+  let forceCap = true; // first word is always capitalized
+  return input
+    .split(/(\s+)/) // keep whitespace runs as tokens
+    .map((tok) => {
+      if (/^\s*$/.test(tok)) return tok;
+      const out = capToken(tok, forceCap);
+      forceCap = /[:?!—–.]["')\]]*$/.test(tok); // next word forced after a boundary
+      return out;
+    })
+    .join('');
 }
 
 export function getArticlesByCategory(category: string): Article[] {

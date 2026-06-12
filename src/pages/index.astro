@@ -15,23 +15,18 @@ const LATEST_COUNT = 12;
 const rest = reviews.slice(1, 1 + LATEST_COUNT);
 const latestGuides = guideArticles.slice(0, 3);
 
-// Live data stats for the "decoded by data" hero strip.
+// Live data stats for the hero strip — honest, auto-updating content counts
+// (no inflated "reviews analyzed" — that was just the sum of Amazon rating counts).
 const reviewCount = reviews.length;
 const productsAnalyzed = articles.reduce((n, a) => n + a.products.length, 0);
-const reviewsCrunched = articles.reduce(
-  (n, a) => n + a.products.reduce((m, p) => m + (p.reviewCount ?? 0), 0),
-  0
-);
-const fmt = (n: number) =>
-  n >= 1_000_000 ? `${(n / 1_000_000).toFixed(1)}M`
-  : n >= 1_000 ? `${(n / 1_000).toFixed(n >= 10_000 ? 0 : 1)}k`
-  : `${n}`;
 
+// Hero stats strip — hidden for now (flip to true to bring it back).
+const SHOW_STATS = false;
 const stats = [
-  { value: fmt(reviewsCrunched), label: 'reviews analyzed' },
   { value: `${productsAnalyzed}`, label: 'products scored' },
-  { value: `${reviewCount}`, label: 'buying guides' },
-  { value: '0', label: 'sponsored picks' },
+  { value: `${reviewCount}`,      label: "buyer's guides" },
+  { value: `${guideArticles.length}`, label: 'how-to guides' },
+  { value: '0',                   label: 'sponsored picks' },
 ];
 
 // Home <title> — brand + keyword-rich slogan (SEOHead won't re-append the name).
@@ -60,7 +55,7 @@ const websiteSchema = {
   <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   <!-- Hero -->
-  <section class="hero blueprint-grid">
+  <section class="hero">
     <div class="container hero-inner">
       <p class="hero-eyebrow"><span class="slash">//</span> data-verified picks</p>
       <h1 class="hero-title">{siteConfig.tagline}</h1>
@@ -70,7 +65,7 @@ const websiteSchema = {
         <strong>Kirk Score</strong>. No fluff, no sponsorships, just the gear the data backs.
       </p>
 
-      {productsAnalyzed > 0 && (
+      {SHOW_STATS && productsAnalyzed > 0 && (
         <div class="hero-stats" role="list" aria-label="Site stats">
           {stats.map((s) => (
             <div class="stat" role="listitem">
@@ -140,12 +135,36 @@ const websiteSchema = {
 <style>
   /* ── Hero ── */
   .hero {
-    background: var(--color-bg-subtle);
+    position: relative;
+    background-color: var(--color-bg-subtle);
+    /* Layers (top→bottom): light gradient for text legibility · blueprint grid · photo. */
+    background-image:
+      linear-gradient(100deg,
+        var(--color-bg-subtle) 0%,
+        var(--color-bg-subtle) 42%,
+        rgba(233,237,245,0.78) 64%,
+        rgba(233,237,245,0.30) 100%),
+      var(--blueprint-grid),
+      url('/hero.jpg');
+    background-size: cover, 28px 28px, cover;
+    background-position: center, 0 0, center right;
+    background-repeat: no-repeat, repeat, no-repeat;
     border-bottom: 1px solid var(--color-border);
     padding: 4.5rem 0 3.25rem;
   }
 
-  .hero-inner { max-width: 760px; }
+  /* On narrow screens the photo would sit under the text — wash it out more. */
+  @media (max-width: 640px) {
+    .hero {
+      background-image:
+        linear-gradient(rgba(244,246,251,0.90), rgba(244,246,251,0.90)),
+        var(--blueprint-grid),
+        url('/hero.jpg');
+      background-size: cover, 28px 28px, cover;
+    }
+  }
+
+  .hero-inner { max-width: 760px; position: relative; }
 
   .hero-eyebrow {
     font-family: var(--font-mono);
