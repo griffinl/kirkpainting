@@ -1,0 +1,357 @@
+{
+  "slug": "best-portable-band-saw",
+  "title": "Best Portable Band Saws of 2026: Match the Saw to Your Actual Cuts",
+  "category": "tools",
+  "categoryLabel": "Tools",
+  "publishedAt": "2026-06-08",
+  "updatedAt": "2026-06-08",
+  "excerpt": "The right portable band saw depends on what you actually cut — compact for conduit, deep-cut for steel. Here's how to avoid buying too much or too little saw.",
+  "featuredImage": "https://m.media-amazon.com/images/I/615-LtWbWpL.jpg",
+  "author": "Editorial Team",
+  "metaDescription": "The right portable band saw depends on what you actually cut — compact for conduit, deep-cut for steel. Here's how to avoid buying too much or too little saw.",
+  "intro": "<p>Few tools punish a mismatch as quickly as a portable band saw. Pick one that's too heavy for your day, and overhead conduit runs turn into shoulder-burning marathons. Pick one that's too small, and you'll find yourself reaching for a reciprocating saw halfway through a cut — defeating the whole reason you bought it. The gap between marketing claims and real-world fatigue shows up fast when you're holding the tool above your head.</p><p>The portable band saw market splits cleanly along cut capacity, and that split dictates everything: weight, one-handed control, battery life, and what stock actually fits between the guides. A 7.7-pound compact saw that disappears into a tool bag is the right call for electricians cutting EMT and all-thread all day. A 5-inch deep-cut cordless unit earns its weight when square tubing and structural steel are on the menu. The trick is knowing which camp you actually live in.</p><p>This guide sorts saws by what they're built to do — not by feature count or spec-sheet superlatives. The picks below reflect years of owner feedback on blade tracking quirks, trigger designs that annoy after month three, and which stock blades snap before the first project is done. Every recommendation here starts with a single question: what are you cutting, and for how long?</p>",
+  "products": [
+    {
+      "rank": 1,
+      "asin": "B00VEA2904",
+      "title": "DEWALT 20V MAX Band Saw, 5\" Cutting Capacity, Integrated Hang Hooks, Portable, For Deep Cuts, Bare Tool Only (DCS374B)",
+      "label": "DEWALT DCS374B 5-Inch",
+      "badge": "Best Overall",
+      "oneLiner": "5-inch brushless deep-cut cordless saw with butter-smooth metal performance and integrated hang hooks.",
+      "tier": "top_pick",
+      "bestFor": "Deep-cut cordless",
+      "usageNote": "💡 Tip: When cutting overhead or one-handed, use a support stand or switch to the lighter compact saw in this set to reduce arm fatigue.",
+      "image": "https://m.media-amazon.com/images/I/615-LtWbWpL.jpg",
+      "rating": 4.8,
+      "reviewCount": 1727,
+      "price": "$332.48",
+      "affiliateUrl": "https://www.amazon.com/dp/B00VEA2904?tag=kirkpainting-20",
+      "specs": [
+        {
+          "label": "Weight",
+          "value": "12.4 lbs"
+        },
+        {
+          "label": "Blade Change",
+          "value": "Tool-less"
+        },
+        {
+          "label": "Power Source",
+          "value": "20V MAX Battery"
+        },
+        {
+          "label": "Variable Speed",
+          "value": "Yes"
+        }
+      ],
+      "pros": [
+        "Exceptional build quality that holds up to daily jobsite demands — 101 mentions, 97% positive",
+        "Buttery-smooth cutting through metal, conduit, wood, and PVC — 63 mentions, 84% positive",
+        "Tool-less blade changes and integrated LED work light speed up adjustments — 25 mentions, 92% positive on ease of use"
+      ],
+      "cons": [
+        "Trigger lock only prevents accidental activation; lacks a constant-on lock for uninterrupted long cuts — User feedback notes the trigger lock is solely a safety preventer",
+        "LED work light cannot be disabled and may cause glare when sighting the cut line up close — Users report the bright light can be blinding without a disable switch"
+      ],
+      "verdict": "For heavy pipe and structural steel on job sites without AC power, this saw delivers the deepest cut capacity and strong user satisfaction in a cordless form factor. Weight makes it a ground-level workhorse; look to the compact option for overhead tasks.",
+      "review": "<p>The brushless motor powers through 5-inch structural steel, thick-walled pipe, and stacked lumber with a consistency that feels near hydraulic. Tool-free blade changes and the variable-speed trigger let you switch from metal to wood without missing a beat, and the built-in LED lights the cut line clearly. Portability comes from integrated hang hooks and a cordless design that moves freely around truck beds and scaffold platforms. Blade tracking stays true on curved cuts, and the LED eliminates shadowing in dark bays.</p><p>This saw targets professionals cutting heavy stock away from AC power, particularly those already on the DEWALT 20V battery platform. At 12.4 pounds, it shines on bench and pipe-rack work; overhead or extended one-handed use brings the weight and the trigger-only safety into play. For those jobs, the ultra-compact one-handed option in this lineup is purpose-built. Expect the deep-cut capacity to justify the heft for ground-level fabrication and demolition.</p><p class=\"usage-note\">💡 💡 Tip: When cutting overhead or one-handed, use a support stand or switch to the lighter compact saw in this set to reduce arm fatigue.</p>"
+    },
+    {
+      "rank": 2,
+      "asin": "B07KKXNWXK",
+      "title": "WEN Portable Band Saw for Metal, 10-Amp, Variable Speed, Handheld (94396)",
+      "label": "WEN 94396 5-Inch Corded",
+      "badge": "Best Budget Corded",
+      "oneLiner": "10-amp variable-speed corded workhorse delivering 5-inch cut capacity at a fraction of premium pricing.",
+      "tier": "runner_up",
+      "bestFor": "Budget corded",
+      "image": "https://m.media-amazon.com/images/I/71QAPuMt6-L.jpg",
+      "rating": 4.6,
+      "reviewCount": 1085,
+      "price": "$129.27",
+      "affiliateUrl": "https://www.amazon.com/dp/B07KKXNWXK?tag=kirkpainting-20",
+      "specs": [
+        {
+          "label": "Weight",
+          "value": "14.5 lbs"
+        },
+        {
+          "label": "Blade Change",
+          "value": "—"
+        },
+        {
+          "label": "Power Source",
+          "value": "Corded 10 Amp"
+        },
+        {
+          "label": "Variable Speed",
+          "value": "60–420 FPM"
+        }
+      ],
+      "pros": [
+        "Delivers 5-inch deep cut capacity at a budget-friendly price, outperforming pricier rivals in sheer value. — Value cited as outstanding across feedback.",
+        "10-Amp motor powers through steel, aluminum, and pipe without bogging down. — Performance praised for strong cutting ability.",
+        "Straightforward controls make it accessible for hobbyists and occasional users. — Ease of use noted positively."
+      ],
+      "cons": [
+        "Weighing 14.5 lbs, overhead or one-handed cutting can become tiring over long sessions. — Some users find it fatiguing for all-day use."
+      ],
+      "verdict": "If you have reliable AC power nearby and can swap in a quality blade, this saw offers deep-cut capability at a price that leaves room for the upgrade.",
+      "review": "<p>A 10-amp motor and variable speed control give this corded saw the muscle to slice through steel, aluminum, and pipe up to 5x5 inches — a cut capacity usually found on saws costing significantly more. Compared to the legendary corded deep-cut workhorse, this WEN trades some refinement for a fraction of the price, making it a compelling option for occasional users.</p><p>Hobbyists, farmers, and DIYers working in a shop or barn near an AC outlet will find the most value here. The stock blade has a known tendency to snap or derail, so budget for an immediate aftermarket upgrade. At 14.5 lbs, extended overhead work can be fatiguing, but for bench-level cutting and stationary tasks, the weight helps with stability.</p>"
+    },
+    {
+      "rank": 3,
+      "asin": "B092QR5LPX",
+      "title": "DEWALT ATOMIC 20V MAX Brushless Cordless 1-3/4 in. Compact Bandsaw, Bare Tool Only (DCS377B)",
+      "label": "DEWALT DCS377B 1-3/4″",
+      "badge": "Best Ultra-Compact for One-Handed Cuts",
+      "oneLiner": "7.7-pound brushless saw that fits in a drill bag and powers through EMT and all-thread overhead.",
+      "tier": "runner_up",
+      "bestFor": "Tight spaces",
+      "image": "https://m.media-amazon.com/images/I/513CgpIKqOS.jpg",
+      "rating": 4.7,
+      "reviewCount": 744,
+      "price": "$219.00",
+      "affiliateUrl": "https://www.amazon.com/dp/B092QR5LPX?tag=kirkpainting-20",
+      "specs": [
+        {
+          "label": "Weight",
+          "value": "7.7 lbs"
+        },
+        {
+          "label": "Blade Change",
+          "value": "—"
+        },
+        {
+          "label": "Power Source",
+          "value": "20V MAX Battery"
+        },
+        {
+          "label": "Variable Speed",
+          "value": "Yes"
+        }
+      ],
+      "pros": [
+        "Compact 7.7-pound design slips into a tool bag and enables fatigue-free one-handed overhead cuts — 13 mentions, 92% positive on size; 8 mentions, 100% positive on portability",
+        "Produces clean, spark-minimal cuts in EMT, strut, PVC, and aluminum — 11 mentions, 91% positive on cutting performance",
+        "Improves jobsite efficiency over a reciprocating saw for repeated small-diameter work — High rating and user praise for saving time over Sawzall"
+      ],
+      "cons": [
+        "1-3/4-inch cut capacity limits the saw to small-diameter stock; pipes over 1-1/2 inches or thick structural metal require a larger saw. — Inherent design limitation of the compact form factor"
+      ],
+      "verdict": "A specialized tool that earns its keep for electricians and HVAC techs repeatedly cutting small conduit and rod in tight quarters.",
+      "review": "<p>At 7.7 pounds and sized to tuck into a tool bag, the DCS377B excels where larger 5-inch deep-cut saws feel clumsy — one-handed overhead cuts, tight stud bays, and repetitive work on EMT and all-thread. Its 1-3/4-inch cut capacity is a deliberate limitation: it cannot handle pipe over 1-1/2 inches or thick structural material. For a DEWALT 20V user who already owns a deep-cut saw and wants a grab-and-go compact for conduit and rod, that tradeoff pays off in speed and reduced strain.</p>"
+    },
+    {
+      "rank": 4,
+      "asin": "B084D8WF2C",
+      "title": "MILWAUKEE'S Band Saw",
+      "label": "Milwaukee 2829-20 Compact",
+      "badge": "Best Compact for M18 Users",
+      "oneLiner": "M18 FUEL brushless compact saw weighing just 7.7 pounds for nimble conduit and strut work.",
+      "tier": "runner_up",
+      "bestFor": "M18 compact",
+      "usageNote": "💡 Tip: Check blade tracking before each job and after any severe bind — a quick adjustment keeps it cutting straight.",
+      "image": "https://m.media-amazon.com/images/I/51lRsDOvkoL.jpg",
+      "rating": 4.7,
+      "reviewCount": 1020,
+      "price": "$292.94",
+      "affiliateUrl": "https://www.amazon.com/dp/B084D8WF2C?tag=kirkpainting-20",
+      "specs": [
+        {
+          "label": "Weight",
+          "value": "7.7 lbs"
+        },
+        {
+          "label": "Blade Change",
+          "value": "—"
+        },
+        {
+          "label": "Power Source",
+          "value": "18V M18 Battery"
+        },
+        {
+          "label": "Variable Speed",
+          "value": "—"
+        }
+      ],
+      "pros": [
+        "At 7.7 pounds, noticeably less fatigue during overhead cuts — 13 mentions, 92% positive on weight",
+        "Smooth, fast cutting through conduit, strut, and all-thread — 34 mentions, 71% positive on cutting performance",
+        "Nimble one-handed design fits easily into tight jobsite spaces — 13 mentions, 92% positive on weight"
+      ],
+      "cons": [
+        "Heavy schedule pipe and thick steel can cause the motor to bog down — 29 mentions, 31% negative on performance — occasionally bogs down under heavier loads",
+        "Blade tracking may drift out of alignment, occasionally leading to binding and derailment — 34 mentions, 29% negative — several reports of blade coming off or saw stalling during cuts"
+      ],
+      "verdict": "For M18 electricians and plumbers who prioritize light weight and one-handed cutting, the 2829-20 is a strong, fast choice — just budget a few minutes to dial in the blade tracking and keep it away from deep structural steel.",
+      "review": "<p>At just 7.7 pounds with brushless power, the Milwaukee 2829-20 is the obvious choice for M18 users who cut overhead all day in tight spaces. It zips through EMT, strut, and all-thread up to around 2.5 inches, making it a nimble one-handed partner for electricians and plumbers. The tradeoff is a blade tracking system that can drift out of alignment, requiring occasional adjustment to prevent binding and derailment — something that's less of a headache if you're cutting lighter stock and don't mind a quick tune-up between jobs.</p><p class=\"usage-note\">💡 💡 Tip: Check blade tracking before each job and after any severe bind — a quick adjustment keeps it cutting straight.</p>"
+    },
+    {
+      "rank": 5,
+      "asin": "B08GXDK9Z3",
+      "title": "Makita XBP04Z 18V LXT® Lithium-Ion Compact Brushless Cordless Band Saw, Tool Only",
+      "label": "Makita XBP04Z 2-5/8″",
+      "badge": "Best Compact Brushless for Makita Fans",
+      "oneLiner": "One-handed brushless saw with constant-speed control ripping through unistrut on the LXT platform.",
+      "tier": "runner_up",
+      "bestFor": "One-handed cuts",
+      "image": "https://m.media-amazon.com/images/I/610Hq-dNcEL.jpg",
+      "rating": 4.8,
+      "reviewCount": 187,
+      "price": "Mid-Range",
+      "affiliateUrl": "https://www.amazon.com/dp/B08GXDK9Z3?tag=kirkpainting-20",
+      "specs": [
+        {
+          "label": "Weight",
+          "value": "7.9 lbs"
+        },
+        {
+          "label": "Blade Change",
+          "value": "—"
+        },
+        {
+          "label": "Power Source",
+          "value": "18V LXT Battery"
+        },
+        {
+          "label": "Variable Speed",
+          "value": "0–630 ft/min"
+        }
+      ],
+      "pros": [
+        "Constant speed control maintains blade speed through heavy cuts without bogging down.",
+        "7.9-pound compact design makes one-handed overhead and tight-space cutting practical."
+      ],
+      "cons": [
+        "Batteries and charger are not included; requires existing LXT investment or separate purchase."
+      ],
+      "verdict": "For LXT electricians who own batteries, this compact saw trades wider blade selection for light weight and constant-speed control that excels on strut and pipe.",
+      "review": "<p>The XBP04Z prioritizes maneuverability over brute capacity, with a 2-5/8-inch cut that suits EMT, strut, and rod. Its brushless motor uses constant speed control to prevent bogging, even when pushing through thick unistrut, a weakness of many compact saws. At 7.9 pounds, it is light enough for extended one-handed overhead work, making it a natural fit for electricians and HVAC techs who cut on ladders or in tight ceilings.</p><p>Makita LXT electricians and HVAC techs installing conduit and rod will appreciate ditching a heavier deep-cut saw. Aftermarket blade options are fewer than for larger saws, so specialty teeth may be harder to find; standard blades handle common EMT and strut without issue.</p>"
+    },
+    {
+      "rank": 6,
+      "asin": "B013P2ZGK8",
+      "title": "Milwaukee 2729-20 M18 FUEL Cordless Lithium-Ion Deep Cut Band Saw (Tool Only)",
+      "label": "Milwaukee 2729-20 Deep Cut",
+      "badge": "Best Heavy-Duty Cordless Deep Cut",
+      "oneLiner": "Tank-built cordless deep-cut saw that blasts through 5-inch square tubing with high-output M18 batteries.",
+      "tier": "runner_up",
+      "bestFor": "Thick steel",
+      "usageNote": "💡 Tip: Pair with a 12Ah high-output battery to avoid performance sag — 5.0Ah packs won't deliver full cutting force.",
+      "image": "https://m.media-amazon.com/images/I/51xlkmahO2L.jpg",
+      "rating": 4.7,
+      "reviewCount": 617,
+      "price": "$479.95",
+      "affiliateUrl": "https://www.amazon.com/dp/B013P2ZGK8?tag=kirkpainting-20",
+      "specs": [
+        {
+          "label": "Weight",
+          "value": "15 lbs"
+        },
+        {
+          "label": "Blade Change",
+          "value": "—"
+        },
+        {
+          "label": "Power Source",
+          "value": "18V M18 Battery"
+        },
+        {
+          "label": "Variable Speed",
+          "value": "—"
+        }
+      ],
+      "pros": [
+        "Tank-like durability and massive cutting power — blasts through 5×5 steel. — 27 mentions, 93% positive on build quality",
+        "Cordless operation replaces corded saws on remote sites. — 19 mentions, 84% positive on performance; many users replaced corded units with this",
+        "Band saw blades outlast reciprocating blades dramatically in thick metal cutting. — Top reviews highlight 100x blade life savings"
+      ],
+      "cons": [
+        "At 15 lbs, one-handed overhead cutting is tiring and balance feels off. — 6 mentions, 50% negative on weight — several call it heavier than Dewalt equivalents"
+      ],
+      "verdict": "If 15 pounds and a 12Ah battery budget fit your workflow, this saw's raw cutting power on steel outperforms any compact alternative.",
+      "review": "<p>The saw's tank-like build translates to massive cutting power on thick stock. It rips through 5x5 square tubing and large pipe with speed that convinces many crews to leave corded units at home. Blades last far longer than reciprocating saw blades in similar tasks, and battery-only operation frees you from extension cords on remote job sites.</p><p>This is the saw for heavy industrial work where 15 pounds won't slow you down and you already own M18 12Ah batteries. Smaller packs cause noticeable power sag, so the investment extends beyond the tool. Purchase only from authorized dealers; Milwaukee may not warranty tools bought via unauthorized Amazon sellers.</p><p class=\"usage-note\">💡 💡 Tip: Pair with a 12Ah high-output battery to avoid performance sag — 5.0Ah packs won't deliver full cutting force.</p>"
+    },
+    {
+      "rank": 7,
+      "asin": "B00LIV0QOU",
+      "title": "Makita XBP02Z 18V LXT Lithium-Ion Cordless Portable Band Saw, Tool Only",
+      "label": "Makita XBP02Z 4-3/4″",
+      "tier": "also_consider",
+      "bestFor": "Makita deep cut",
+      "image": "https://m.media-amazon.com/images/I/514LI7iGoML.jpg",
+      "rating": 4.8,
+      "reviewCount": 368,
+      "price": "$434.00",
+      "affiliateUrl": "https://www.amazon.com/dp/B00LIV0QOU?tag=kirkpainting-20",
+      "specs": [
+        {
+          "label": "Weight",
+          "value": "14.3 lbs"
+        },
+        {
+          "label": "Blade Change",
+          "value": "Tool-less"
+        },
+        {
+          "label": "Power Source",
+          "value": "18V LXT Battery"
+        },
+        {
+          "label": "Variable Speed",
+          "value": "275–530 ft/min"
+        }
+      ],
+      "pros": [
+        "Clean, accurate cuts through pipe and metal stock for precise fabrication. — 24 mentions, 100% positive on quality",
+        "Tool-free blade changes and an easy-to-see cut line speed up workflow. — 5 mentions, 100% positive on blade replacement"
+      ],
+      "cons": [
+        "The 14.3-lb weight and forward balance can cause fatigue during overhead or extended vertical cuts. — 10 mentions, 40% negative on weight — some found it poorly balanced"
+      ],
+      "verdict": "If you're a Makita LXT owner who needs cordless 4-3/4-inch capacity and can work within the weight and brushed-motor runtime, this saw is a capable companion on a fleet-shared battery platform.",
+      "review": "<p>The Makita XBP02Z cuts pipe and metal cleanly, with tool-free blade swaps and an unobstructed sight line to the cut point. Its brushed motor falls short of brushless rivals on runtime, so you'll swap batteries sooner during extended remote jobs — a manageable tradeoff for shops already supplied with Makita LXT packs who prioritize deep-cut capability over the latest motor tech.</p>"
+    }
+  ],
+  "buyingGuide": [
+    {
+      "heading": "Cutting Capacity",
+      "body": "<p>Cut capacity is the maximum width and depth of stock the saw's throat opening can swallow. Compact saws in the 1-3/4 to 2-5/8 inch range handle conduit, all-thread, and small pipe with ease. Deep-cut models that span 4-3/4 to 5 inches take on square tubing, structural steel, and anything a compact saw physically cannot grip.</p><p>The hidden trade-off: larger capacity means a larger frame, more metal in the housing, and an extra 5 to 7 pounds in your hands. If 90% of your cuts are on 3/4-inch EMT, dragging a 5-inch deep-cut saw overhead all day is unnecessary punishment. Buy for the stock you actually cut, not the biggest thing you might cut once.</p>"
+    },
+    {
+      "heading": "Power Source",
+      "body": "<p>Corded saws deliver unlimited runtime and consistent torque without battery sag, making them ideal for stationary shop work and long fabrication sessions. Cordless models running on 18V or 20V platforms provide freedom on job sites where outlets are scarce.</p><p>The less obvious factor is battery demand. Deep-cut cordless saws pull significant current through thick stock, and performance drops noticeably with smaller battery packs. A 2.0Ah or 5.0Ah battery that runs a compact saw for dozens of cuts may leave a deep-cut unit bogging down mid-cut. Heavy users should budget for high-output batteries alongside the bare tool.</p>"
+    },
+    {
+      "heading": "Weight and Balance",
+      "body": "<p>Weight directly impacts fatigue curves, especially during overhead or one-handed cuts where the saw's full mass hangs on your arm and shoulder. Compact saws around 7 to 8 pounds stay manageable for extended overhead work. Deep-cut saws at 12 to 15 pounds are best suited for horizontal or bench-height cutting where gravity assists rather than fights you.</p><p>Balance matters as much as raw weight. A saw that carries its mass toward the front blade guide pulls your wrist forward, requiring constant counter-pressure. Before buying, consider the orientation of your most common cut — vertical overhead, horizontal at waist height, or angled in tight spaces — and pick a weight class accordingly.</p>"
+    },
+    {
+      "heading": "Variable Speed",
+      "body": "<p>Variable speed control lets you dial blade surface feet per minute to match the material. Slower speeds reduce heat buildup and blade wear on thicker steel and stainless. Higher speeds clear chips faster on softer metals like aluminum and copper, giving you quicker cuts.</p><p>Single-speed saws simplify operation but force a one-setting compromise. For users cutting the same type of stock all day — say, electricians on EMT — a fixed speed works fine. Anyone switching between aluminum, steel, and stainless across a single project benefits from the adjustability, both for cut quality and blade longevity.</p>"
+    },
+    {
+      "heading": "Blade Change Mechanism",
+      "body": "<p>Tool-less blade changes eliminate downtime searching for wrenches or hex keys when a blade snaps or dulls mid-job. A tension lever releases the old blade and locks the new one in seconds, keeping your workflow moving on a crowded job site.</p><p>The deeper reality: stock blades on budget-friendly saws often fail early — sometimes on the first project. A tool-less mechanism becomes a frequent companion if the factory blade is subpar. Budget for a quality aftermarket blade alongside the saw itself, and the combination of fast swaps and a durable blade keeps frustration low.</p>"
+    }
+  ],
+  "faq": [
+    {
+      "question": "Why does the blade keep popping off my portable band saw?",
+      "answer": "<p>Blade derailment typically comes from two sources: incorrect tracking adjustment or a worn-out blade that's stretched and lost tension. Start by checking that the blade guides and tracking knob are set correctly — the blade should run centered on the wheels without drifting. If the saw shipped with a low-quality stock blade, swapping to a name-brand aftermarket blade often resolves the issue immediately. On some budget models, blade retention is a known design weakness that no amount of adjustment fixes.</p>"
+    },
+    {
+      "question": "What's the difference between a compact band saw and a deep cut band saw?",
+      "answer": "<p>Compact band saws have a throat opening of roughly 2 to 3 inches and weigh between 7 and 9 pounds — built for one-handed use on conduit, strut, and threaded rod. Deep-cut band saws open up to 5 inches and weigh 12 to 15 pounds, designed for square tubing, structural steel, and heavy pipe. The trade-off is straightforward: compacts prioritize agility, deep-cuts prioritize capacity. If you rarely cut material thicker than 2 inches, a compact saw saves your shoulders without sacrificing function.</p>"
+    },
+    {
+      "question": "How many cuts can I get from one battery on a cordless portable band saw?",
+      "answer": "<p>Battery life varies dramatically by saw size, material, and battery amp-hour rating. A compact saw paired with a 5.0Ah battery typically handles 100 to 150 cuts through 3/4-inch EMT before needing a swap. A deep-cut saw in thick steel draws far more current and may drain that same battery in 20 to 30 cuts. The real-world lesson: pair deep-cut saws with the highest amp-hour battery your platform offers, and carry a spare for long days on structural steel.</p>"
+    },
+    {
+      "question": "Can I use a portable band saw to cut 4-inch schedule 40 pipe?",
+      "answer": "<p>Only a deep-cut model with a 5-inch capacity can handle 4-inch schedule 40 pipe in a single pass. Compact saws cap out at roughly 2-1/2 to 2-5/8 inches and physically cannot open wide enough to accept stock that large. Even with a deep-cut saw, the pipe's wall thickness will dictate blade speed — slower speeds prevent overheating and extend blade life on thick-walled schedule 40 and schedule 80.</p>"
+    }
+  ]
+}
